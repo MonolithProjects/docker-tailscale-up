@@ -7,12 +7,14 @@ on:
     - cron: '0 0 * * *'
   workflow_dispatch:
 
-matrix:
-  TAILSCALE_RELEASE: [latest, stable, unstable, v1.23, v1.22, v1.21, v1.20]
+
 
 jobs:
-  docker:
+  docker-image:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        TAILSCALE_RELEASE: [latest, stable, unstable, v1.23, v1.22, v1.21, v1.20]
     steps:
       - uses: actions/checkout@master
 
