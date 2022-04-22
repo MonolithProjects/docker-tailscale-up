@@ -1,10 +1,12 @@
 ARG TAILSCALE_RELEASE=latest
 FROM tailscale/tailscale:$TAILSCALE_RELEASE
 
+WORKDIR /
+
 LABEL org.opencontainers.image.authors="Michal Muransky <mike.muransky@gmail.com>"
-LABEL org.opencontainers.image.url="https://github.com/monolithprojects/docker-tailscale"
-LABEL org.opencontainers.image.documentation="https://github.com/monolithprojects/docker-tailscale"
-LABEL org.opencontainers.image.source="https://github.com/monolithprojects/docker-tailscale"
+LABEL org.opencontainers.image.url="https://github.com/monolithprojects/docker-tailscale-up"
+LABEL org.opencontainers.image.documentation="https://github.com/monolithprojects/docker-tailscale-up"
+LABEL org.opencontainers.image.source="https://github.com/monolithprojects/docker-tailscale-up"
 LABEL org.opencontainers.image.title="monolithprojects/tailscale-up"
 LABEL org.opencontainers.image.description="Tailscale is Wireguard made easy"
 
