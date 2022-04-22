@@ -1,0 +1,34 @@
+name: Build latest
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+env:
+  TAILSCALE_RELEASE: latest
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+    - name: Get latest tag
+      id: latest_tag
+      uses: jacobtomlinson/gha-get-docker-hub-tags@0.1.1
+      with:
+        org: 'mysql'  # Docker Hub user or organisation name
+        repo: 'mysql-server'  # Docker Hub repository name
+
+      - name: Kaniko build
+        uses: aevea/action-kaniko@master
+        with:
+          image: monolithprojects/tailscale-up
+          extra_args: $TAILSCALE_RELEASE
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          cache: true
+          cache_registry: monolithprojects/cache
