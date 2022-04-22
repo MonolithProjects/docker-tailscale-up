@@ -20,7 +20,7 @@ jobs:
         uses: aevea/action-kaniko@master
         with:
           image: monolithprojects/tailscale-up
-          extra_args: $TAILSCALE_RELEASE
+          extra_args: TAILSCALE_RELEASE=$TAILSCALE_RELEASE
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           cache: true
