@@ -25,3 +25,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           cache: true
           cache_registry: monolithprojects/cache
+          tag: ${{ env.TAILSCALE_RELEASE }}
