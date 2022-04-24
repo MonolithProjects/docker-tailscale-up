@@ -1,4 +1,4 @@
-# Tailscale-up Container image (WIP)
+# Tailscale-up Container image
 
 [![GitHub Actions](https://github.com/MonolithProjects/docker-tailscale-up/workflows/Build%20image/badge.svg)](https://github.com/MonolithProjects/docker-tailscale-up/actions)
 [![DockerHub-pulls](https://img.shields.io/docker/pulls/monolithprojects/tailscale-up)](https://hub.docker.com/repository/docker/monolithprojects/tailscale-up)
