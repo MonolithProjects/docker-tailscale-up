@@ -14,17 +14,27 @@ jobs:
     #   matrix:
     #     TAILSCALE_RELEASE: [latest, stable, unstable, v1.24, v1.23, v1.22, v1.21, v1.20]
 
+  setup-matrix:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: github-actions-tools/gh-list-releases@main
-        id: list-releases
+      - name: Get missing tags
+        id: tags
+        uses: s6on/mirror-docker-tags-action@v1.0.0
         with:
-          owner: tailscale
-          repo: tailscale
-          # from_release: "NGINX: 0.44.0"
-          # to_release: "NGINX: 0.45.0"
-          nb_results: 30
-          regex_filter: "v1+.*"
+          from: tailscale/tailscale[latest,stable,1.24]
+          to: monolithprojects
+          # updateAll: ${{ github.event_name != 'schedule' }}
+    outputs:
+      strategy:
+        matrix: ${{ steps.tags.outputs.matrix }}
+  # build-push:
+  #   runs-on: ubuntu-latest
+  #   needs: setup-matrix
+  #   if: ${{ needs.setup-matrix.outputs.matrix }}
+  #   strategy:
+  #     fail-fast: false
+  #     matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
+  #   name: ${{ matrix.base_img }}
 
       # - name: Kaniko build
       #   uses: aevea/action-kaniko@master
@@ -36,8 +46,6 @@ jobs:
       #     cache: true
       #     cache_registry: monolithprojects/cache
       #     tag: ${{ matrix.TAILSCALE_RELEASE }}
-
+      steps:
       - run: |
-          echo '${{ steps.list-releases.outputs.releases }}' | jq -r '.[]' | while read release ; do
-            echo "release: ${release}"
-          done
+          echo '${{ steps.tags.outputs.matrix }}'
