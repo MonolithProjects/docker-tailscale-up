@@ -25,7 +25,6 @@ jobs:
           # to_release: "NGINX: 0.45.0"
           nb_results: 30
           regex_filter: 'v[1.24.]+.*'
-          skip_from_release: true
 
       # - name: Kaniko build
       #   uses: aevea/action-kaniko@master
