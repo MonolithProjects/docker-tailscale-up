@@ -30,7 +30,7 @@ jobs:
     if: ${{ needs.setup-matrix.outputs.matrix }}
     strategy:
       fail-fast: false
-      matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.setup-matrix.outputs) }}
 
     steps:
       - run: |
