@@ -17,14 +17,11 @@ jobs:
   setup-matrix:
     runs-on: ubuntu-latest
     steps:
-      - name: Get missing tags
+      - name: Get tags
         id: tags
-        uses: s6on/mirror-docker-tags-action@v1.1
-        with:
-          from: tailscale/tailscale[latest,stable,v1.24]
-          to: monolithprojects/tailscale-up
-          allowed-platforms: linux/amd64
-          updateAll: ${{ github.event_name != 'schedule' }}
+        run: |
+          output=(curl -s 'https://registry.hub.docker.com/v2/repositories/tailscale/tailscale/tags/?page_size=100' \
+          |jq '."results"[]["name"]'| tr -d '"'| grep "v1."); ::set-output name=tags::$output"
     outputs:
       matrix: ${{ steps.tags.outputs.matrix }}
 
@@ -34,7 +31,7 @@ jobs:
     if: ${{ needs.setup-matrix.outputs.matrix }}
     strategy:
       fail-fast: false
-      matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix.tags) }}
+      inmatrix: ${{ join(needs.setup-matrix.outputs.matrix.tags, ', ') }}
 
     steps:
       - run: |
