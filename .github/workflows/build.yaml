@@ -23,6 +23,7 @@ jobs:
         with:
           from: tailscale/tailscale[latest,stable,1.24]
           to: monolithprojects
+          allowed-platforms: amd64
           # updateAll: ${{ github.event_name != 'schedule' }}
   outputs:
     runs-on: ubuntu-latest
