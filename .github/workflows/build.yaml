@@ -16,19 +16,21 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v3
+      - uses: github-actions-tools/gh-list-releases@main
+        id: list-releases
         with:
-          images: |
-            tailscale/tailscale
-
-          tags: |
-            type=ref,event=branch
-            type=ref,event=tag
-            type=semver,pattern={{raw}}
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
+          owner: tailscale
+          repo: tailscale
+          # from_release: "NGINX: 0.44.0"
+          # to_release: "NGINX: 0.45.0"
+          nb_results: 10
+          # exclude_ranges: |
+          #   -3
+          #   5
+          #   7-8
+          #   9-
+          # regex_filter: "/^(?!helm-chart-3.25.0|helm-chart-3.27.0).*/i"
+          skip_from_release: true
 
       # - name: Kaniko build
       #   uses: aevea/action-kaniko@master
@@ -41,6 +43,7 @@ jobs:
       #     cache_registry: monolithprojects/cache
       #     tag: ${{ matrix.TAILSCALE_RELEASE }}
 
-      - name: Print ...
-        run: |
-          echo "${{ steps.meta.outputs.tags }}"
+      - run: |
+          echo '${{ steps.list-releases.outputs.releases }}' | jq -r '.[]' | while read release ; do
+            echo "release: ${release}"
+          done
