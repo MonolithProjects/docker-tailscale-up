@@ -23,13 +23,13 @@ jobs:
           images: |
             tailscale/tailscale
 
-          # tags: |
-          #   type=ref,event=branch
-          #   type=ref,event=pr
-          #   type=semver,pattern={{raw}}
-          #   type=semver,pattern={{version}}
-          #   type=semver,pattern={{major}}.{{minor}}
-          #   type=sha
+          tags: |
+            type=ref,event=branch
+            type=ref,event=tag
+            type=semver,pattern={{raw}}
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha
 
       # - name: Kaniko build
       #   uses: aevea/action-kaniko@master
@@ -42,5 +42,6 @@ jobs:
       #     cache_registry: monolithprojects/cache
       #     tag: ${{ matrix.TAILSCALE_RELEASE }}
 
-      - run: |
-          echo ${{ steps.meta.outputs.tags }}
+      - name: Print ...
+        run: |
+          echo "${{ steps.metadata.outputs.tags }}"
