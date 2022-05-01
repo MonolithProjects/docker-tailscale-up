@@ -39,7 +39,7 @@ jobs:
     name: ${{ matrix.base_img }}
     steps:
       - run: |
-          echo ${{ needs.setup-matrix.outputs.matrix }}
+          echo ${{ fromJson(matrix) }}
 
       # - name: Kaniko build
       #   uses: aevea/action-kaniko@master
