@@ -31,7 +31,7 @@ jobs:
     if: ${{ needs.setup-matrix.outputs.matrix }}
     strategy:
       fail-fast: false
-      inmatrix: ${{ join(needs.setup-matrix.outputs.matrix.tags, ', ') }}
+      matrix: ${{ join(needs.setup-matrix.outputs.matrix.tags, ', ') }}
 
     steps:
       - run: |
