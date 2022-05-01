@@ -24,7 +24,7 @@ jobs:
           from: tailscale/tailscale[latest,stable,1.24]
           to: monolithprojects/tailscale-up
           allowed-platforms: linux/amd64
-          # updateAll: ${{ github.event_name != 'schedule' }}
+          updateAll: ${{ github.event_name != 'schedule' }}
   outputs:
     runs-on: ubuntu-latest
     needs: setup-matrix
