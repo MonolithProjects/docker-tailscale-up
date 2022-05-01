@@ -23,7 +23,7 @@ jobs:
           repo: tailscale
           # from_release: "NGINX: 0.44.0"
           # to_release: "NGINX: 0.45.0"
-          # nb_results: 10
+          nb_results: 30
           # exclude_ranges: |
           #   -3
           #   5
