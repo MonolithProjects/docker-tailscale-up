@@ -21,7 +21,7 @@ jobs:
         id: tags
         uses: s6on/mirror-docker-tags-action@v1.1
         with:
-          from: tailscale[latest,stable,v1.24]
+          from: tailscale/tailscale[latest,stable,v1.24]
           to: monolithprojects/tailscale-up
           allowed-platforms: linux/amd64
           updateAll: ${{ github.event_name != 'schedule' }}
@@ -38,7 +38,7 @@ jobs:
 
     steps:
       - run: |
-          echo ${{ steps.tags.outputs.matrix }}
+          echo ${{ matrix.base_img }}
 
       # - name: Kaniko build
       #   uses: aevea/action-kaniko@master
