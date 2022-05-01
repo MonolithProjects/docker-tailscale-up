@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  container-image:
-    runs-on: ubuntu-latest
+  # container-image:
+  #   runs-on: ubuntu-latest
     # strategy:
     #   matrix:
     #     TAILSCALE_RELEASE: [latest, stable, unstable, v1.24, v1.23, v1.22, v1.21, v1.20]
