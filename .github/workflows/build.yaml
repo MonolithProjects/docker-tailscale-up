@@ -33,9 +33,9 @@ jobs:
       fail-fast: false
       matrix: ${{ join(needs.setup-matrix.outputs.matrix.tags, ', ') }}
 
-  #   steps:
-  #     - run: |
-  #         echo ${{ matrix }}
+    steps:
+      - run: |
+          echo ${{ matrix }}
 
       # - name: Kaniko build
       #   uses: aevea/action-kaniko@master
