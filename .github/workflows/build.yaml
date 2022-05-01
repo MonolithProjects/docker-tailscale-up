@@ -25,17 +25,17 @@ jobs:
     outputs:
       matrix: ${{ steps.tags.outputs.matrix }}
 
-  outputs:
-    runs-on: ubuntu-latest
-    needs: setup-matrix
-    if: ${{ needs.setup-matrix.outputs.matrix }}
-    strategy:
-      fail-fast: false
-      matrix: ${{ join(needs.setup-matrix.outputs.matrix.tags, ', ') }}
+  # outputs:
+  #   runs-on: ubuntu-latest
+  #   needs: setup-matrix
+  #   if: ${{ needs.setup-matrix.outputs.matrix }}
+  #   strategy:
+  #     fail-fast: false
+  #     matrix: ${{ join(needs.setup-matrix.outputs.matrix.tags, ', ') }}
 
-    steps:
-      - run: |
-          echo ${{ matrix }}
+  #   steps:
+  #     - run: |
+  #         echo ${{ matrix }}
 
       # - name: Kaniko build
       #   uses: aevea/action-kaniko@master
