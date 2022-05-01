@@ -24,12 +24,12 @@ jobs:
           # from_release: "NGINX: 0.44.0"
           # to_release: "NGINX: 0.45.0"
           nb_results: 30
-          # exclude_ranges: |
-          #   -3
-          #   5
-          #   7-8
-          #   9-
-          # regex_filter: "/^(?!helm-chart-3.25.0|helm-chart-3.27.0).*/i"
+          exclude_ranges: |
+            -3
+            5
+            7-8
+            9-
+          regex_filter: 'v[1.24.]+.*'
           skip_from_release: true
 
       # - name: Kaniko build
