@@ -34,12 +34,11 @@ jobs:
     if: ${{ needs.setup-matrix.outputs.matrix }}
     strategy:
       fail-fast: false
-      matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix.tags) }}
 
-    name: ${{ matrix.base_img }}
     steps:
       - run: |
-          echo ${{ fromJson(matrix) }}
+          echo ${{ matrix }}
 
       # - name: Kaniko build
       #   uses: aevea/action-kaniko@master
