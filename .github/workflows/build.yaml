@@ -44,4 +44,4 @@ jobs:
 
       - name: Print ...
         run: |
-          echo "${{ steps.metadata.outputs.tags }}"
+          echo "${{ steps.meta.outputs.tags }}"
