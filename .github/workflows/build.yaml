@@ -20,7 +20,8 @@ jobs:
       - name: Get tags
         id: tags
         run: |
-          output=`curl -s 'https://registry.hub.docker.com/v2/repositories/tailscale/tailscale/tags/?page_size=100' | jq '."results"[]["name"]'| tr -d '"'| grep "v1."`; ::set-output name=tags::$output
+          output=`curl -s 'https://registry.hub.docker.com/v2/repositories/tailscale/tailscale/tags/?page_size=100' | jq '."results"[]["name"]'| tr -d '"'| grep "v1."`
+          echo "::set-output name=tags::$output"
     outputs:
       matrix: ${{ steps.tags.outputs.matrix }}
 
