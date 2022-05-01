@@ -2,7 +2,7 @@ name: Build image
 on:
   push:
     branches:
-      - main
+      - develop
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
@@ -12,17 +12,36 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        TAILSCALE_RELEASE: [latest, stable, unstable, v1.23, v1.22, v1.21, v1.20]
+        TAILSCALE_RELEASE: [latest, stable, unstable, v1.24, v1.23, v1.22, v1.21, v1.20]
 
     steps:
       - uses: actions/checkout@master
-      - name: Kaniko build
-        uses: aevea/action-kaniko@master
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
         with:
-          image: monolithprojects/tailscale-up
-          extra_args: --build-arg TAILSCALE_RELEASE=${{ matrix.TAILSCALE_RELEASE }}
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          cache: true
-          cache_registry: monolithprojects/cache
-          tag: ${{ matrix.TAILSCALE_RELEASE }}
+          images: |
+            tailscale/tailscale
+
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{raw}}
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha
+
+      # - name: Kaniko build
+      #   uses: aevea/action-kaniko@master
+      #   with:
+      #     image: monolithprojects/tailscale-up
+      #     extra_args: --build-arg TAILSCALE_RELEASE=${{ matrix.TAILSCALE_RELEASE }}
+      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #     password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      #     cache: true
+      #     cache_registry: monolithprojects/cache
+      #     tag: ${{ matrix.TAILSCALE_RELEASE }}
+
+      - run: |
+          echo ${{ steps.meta.outputs.tags }}
+          echo ${{ steps.meta.outputs.tags.major }}
