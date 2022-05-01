@@ -24,9 +24,12 @@ jobs:
           from: tailscale/tailscale[latest,stable,1.24]
           to: monolithprojects
           # updateAll: ${{ github.event_name != 'schedule' }}
-    outputs:
-      strategy:
-        matrix: ${{ steps.tags.outputs.matrix }}
+  outputs:
+    needs: setup-matrix
+    if: ${{ needs.setup-matrix.outputs.matrix }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
   # build-push:
   #   runs-on: ubuntu-latest
   #   needs: setup-matrix
@@ -46,6 +49,6 @@ jobs:
       #     cache: true
       #     cache_registry: monolithprojects/cache
       #     tag: ${{ matrix.TAILSCALE_RELEASE }}
-      steps:
+    steps:
       - run: |
           echo '${{ steps.tags.outputs.matrix }}'
