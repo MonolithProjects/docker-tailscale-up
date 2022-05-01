@@ -36,9 +36,7 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
 
-    steps:
-      - run: |
-          echo ${{ matrix.base_img }}
+    name: ${{ matrix.base_img }}
 
       # - name: Kaniko build
       #   uses: aevea/action-kaniko@master
