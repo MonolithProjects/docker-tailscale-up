@@ -30,4 +30,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: monolithprojects/tailscale-up:latest,${{ steps.tailscale-release.outputs.version }}
+          tags: ghcr.io/monolithprojects/tailscale-up:latest,${{ steps.tailscale-release.outputs.version }}
