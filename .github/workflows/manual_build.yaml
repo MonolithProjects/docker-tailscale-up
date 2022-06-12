@@ -22,10 +22,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-      - name: Read Tailscale version
-        id: tailscale-release
-        run: |
-          echo ::set-output name=version::$(cat tailscale-versions/tailscale-latest.txt)
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
@@ -34,7 +30,7 @@ jobs:
           push: true
           build-args: |
             TAILSCALE_RELEASE=${{ inputs.tailscale_release }}
-          tags: ghcr.io/monolithprojects/tailscale-up:latest,ghcr.io/monolithprojects/tailscale-up:${{ steps.tailscale-release.outputs.version }}
+          tags: ghcr.io/monolithprojects/tailscale-up:latest,ghcr.io/monolithprojects/tailscale-up:${{ inputs.tailscale_release }}
 
   image_to_dockerhub:
     runs-on: ubuntu-latest
@@ -50,10 +46,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-      - name: Read Tailscale version
-        id: tailscale-release
-        run: |
-          echo ::set-output name=version::$(cat tailscale-versions/tailscale-latest.txt)
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
@@ -62,4 +54,4 @@ jobs:
           push: true
           build-args: |
             TAILSCALE_RELEASE=${{ inputs.tailscale_release }}
-          tags: monolithprojects/tailscale-up:latest,monolithprojects/tailscale-up:${{ steps.tailscale-release.outputs.version }}
+          tags: monolithprojects/tailscale-up:latest,monolithprojects/tailscale-up:${{ inputs.tailscale_release }}
