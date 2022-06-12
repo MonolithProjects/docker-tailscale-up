@@ -20,7 +20,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ github.token }}
+          password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - name: Read Tailscale version
         id: tailscale-release
         run: |
