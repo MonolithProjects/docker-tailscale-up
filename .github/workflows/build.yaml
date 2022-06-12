@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  docker:
+  container_image:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,4 +30,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ github.actor }}/tailscale-up:latest,${{ steps.tailscale-release.outputs.modified }}
+          tags: monolithprojects/tailscale-up:latest,${{ steps.tailscale-release.outputs.version }}
