@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
         tailscale-minor: ${{ steps.tailscale-minor.outputs.csv }}
-        tailscale-patch: ${{ steps.tailscale-patch.outputs.csv }}
+        tailscale-patch: ${{ steps.tailscale-patch.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
