@@ -1,4 +1,4 @@
-name: Get latest Tailscale version
+name: Find Tailscale version
 on:
   push:
   schedule:
