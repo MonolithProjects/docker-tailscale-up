@@ -1,0 +1,65 @@
+name: Build image (manual)
+on:
+  workflow_dispatch:
+    inputs:
+      tailscale_release:
+        description: 'Tailscale Release you want to build image for.'
+        required: true
+        type: string
+jobs:
+  image_to_ghrc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to GHRC
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      - name: Read Tailscale version
+        id: tailscale-release
+        run: |
+          echo ::set-output name=version::$(cat tailscale-versions/tailscale-latest.txt)
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          build-args: |
+            TAILSCALE_RELEASE=${{ inputs.tailscale_release }}
+          tags: ghcr.io/monolithprojects/tailscale-up:latest,ghcr.io/monolithprojects/tailscale-up:${{ steps.tailscale-release.outputs.version }}
+
+  image_to_dockerhub:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Read Tailscale version
+        id: tailscale-release
+        run: |
+          echo ::set-output name=version::$(cat tailscale-versions/tailscale-latest.txt)
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          build-args: |
+            TAILSCALE_RELEASE=${{ inputs.tailscale_release }}
+          tags: monolithprojects/tailscale-up:latest,monolithprojects/tailscale-up:${{ steps.tailscale-release.outputs.version }}
