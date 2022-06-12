@@ -29,5 +29,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
+          file: ./Dockerfile
           push: true
-          tags: ghcr.io/monolithprojects/tailscale-up:latest,${{ steps.tailscale-release.outputs.version }}
+          tags: ghcr.io/monolithprojects/tailscale-up:latest,ghcr.io/monolithprojects/tailscale-up:${{ steps.tailscale-release.outputs.version }}
