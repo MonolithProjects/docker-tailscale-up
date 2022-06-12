@@ -12,6 +12,8 @@ jobs:
         tailscale-minor: ${{ steps.tailscale-minor.outputs.version }}
         tailscale-patch: ${{ steps.tailscale-patch.outputs.csv }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Read Tailscale version
         id: tailscale-patch
         run: |
