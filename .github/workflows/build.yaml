@@ -3,7 +3,6 @@ on:
   push:
     paths:
       - 'tailscale-versions/*'
-  workflow_dispatch:
 
 jobs:
   read_tailscale_version:
