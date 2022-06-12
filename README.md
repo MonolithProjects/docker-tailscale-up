@@ -10,6 +10,7 @@ Daily built Tailscale container image which extends the original [tailscale/tail
 - `latest`
 - `stable`
 - `unstable`
+- `1.24`
 - `1.23`
 - `1.22`
 - `1.21`
