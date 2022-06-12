@@ -3,18 +3,7 @@
 [![GitHub Actions](https://github.com/MonolithProjects/docker-tailscale-up/workflows/Build%20image/badge.svg)](https://github.com/MonolithProjects/docker-tailscale-up/actions)
 [![DockerHub-pulls](https://img.shields.io/docker/pulls/monolithprojects/tailscale-up)](https://hub.docker.com/repository/docker/monolithprojects/tailscale-up)
 
-Daily built Tailscale container image which extends the original [tailscale/tailscale](https://hub.docker.com/r/tailscale/tailscale) image by building-in a script for automatic execution of `tailscaled` and `tailscale up` CLI command (including all ["up" arguments](https://tailscale.com/kb/1080/cli/#up) as environment variables)
-
-## Tags
-
-- `latest`
-- `stable`
-- `unstable`
-- `1.24`
-- `1.23`
-- `1.22`
-- `1.21`
-- `1.20`
+Tailscale-up is a container image which extends the original [tailscale/tailscale](https://hub.docker.com/r/tailscale/tailscale) image by building-in a script for automatic execution of `tailscaled` and `tailscale up` CLI command (including all ["up" arguments](https://tailscale.com/kb/1080/cli/#up) which can be set as a container environment variables)
 
 ## Supported flags
 
@@ -45,10 +34,10 @@ For flags description, please check: https://tailscale.com/kb/1080/cli/#up
 version: '3'
 services:
   tailscale:
-    image: monolithprojects/tailscale-up:stable
+    image: monolithprojects/tailscale-up:latest
     environment:
       - AUTHKEY=$AUTHKEY
-      - ACCEPT_DNS=true # This can be any value as the script is evaluating only if the variable is set.
+      - ACCEPT_DNS=true # This can be any value as the script is evaluating only if the variable is set or not.
       - CUSTOM_HOSTNAME="myserver"
     volumes:
       - /dev/net/tun:/dev/net/tun
