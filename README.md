@@ -3,7 +3,7 @@
 [![GitHub Actions](https://github.com/MonolithProjects/docker-tailscale-up/workflows/Build%20image/badge.svg)](https://github.com/MonolithProjects/docker-tailscale-up/actions)
 [![DockerHub-pulls](https://img.shields.io/docker/pulls/monolithprojects/tailscale-up)](https://hub.docker.com/repository/docker/monolithprojects/tailscale-up)
 
-Tailscale-up is a container image which extends the original [tailscale/tailscale](https://hub.docker.com/r/tailscale/tailscale) image by building-in a script for automatic execution of `tailscaled` and `tailscale up` CLI command (including all ["up" arguments](https://tailscale.com/kb/1080/cli/#up) which can be set as a container environment variables)
+Tailscale-up is a container image which extends the original [tailscale/tailscale](https://hub.docker.com/r/tailscale/tailscale) image by building-in a script for automatic execution of `tailscaled` and `tailscale up` CLI command (including all ["up" arguments](https://tailscale.com/kb/1080/cli/#up) which can be set as a container environment variables).
 
 ## Supported flags
 
