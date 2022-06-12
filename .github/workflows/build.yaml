@@ -9,7 +9,7 @@ jobs:
   read_tailscale_version:
     runs-on: ubuntu-latest
     outputs:
-        tailscale-minor: ${{ steps.tailscale-minor.outputs.version }}
+        tailscale-minor: ${{ steps.tailscale-minor.outputs.csv }}
         tailscale-patch: ${{ steps.tailscale-patch.outputs.csv }}
     steps:
       - name: Checkout
@@ -22,7 +22,7 @@ jobs:
         uses: pr-mpt/actions-semver-aliases@v1
         id: tailscale-minor
         with:
-          version: ${{ steps.tailscale-release.outputs.version }}
+          version: ${{ steps.tailscale-patch.outputs.version }}
           prefix: v
           major: false
           minor: true
