@@ -10,7 +10,7 @@ LABEL org.opencontainers.image.source="https://github.com/monolithprojects/docke
 LABEL org.opencontainers.image.title="monolithprojects/tailscale-up"
 LABEL org.opencontainers.image.description="Tailscale is Wireguard made easy"
 
-COPY . .
+COPY ./tailscale.sh .
 
 HEALTHCHECK --interval=30s --timeout=2s CMD tailscale ip > /dev/null || exit 1
 
