@@ -1,7 +1,6 @@
 # Tailscale-up Container image
 
 [![Build image](https://github.com/MonolithProjects/docker-tailscale-up/actions/workflows/build.yaml/badge.svg)](https://github.com/MonolithProjects/docker-tailscale-up/actions/workflows/build.yaml)
-[![DockerHub-pulls](https://img.shields.io/docker/pulls/monolithprojects/tailscale-up)](https://hub.docker.com/repository/docker/monolithprojects/tailscale-up)
 [![DockerHub-stable](https://img.shields.io/docker/v/monolithprojects/tailscale-up/latest?label=stable)](https://hub.docker.com/repository/docker/monolithprojects/tailscale-up)
 [![DockerHub-unstable](https://img.shields.io/docker/v/monolithprojects/tailscale-up?color=orange&label=unstable&sort=semver)](https://hub.docker.com/repository/docker/monolithprojects/tailscale-up)
 
