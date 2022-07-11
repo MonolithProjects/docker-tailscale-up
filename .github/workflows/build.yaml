@@ -1,8 +1,10 @@
 name: Build image
 on:
   push:
+    branches:
+      - main
     paths:
-      - 'tailscale-versions/tailscale-latest.txt'
+      - 'tailscale-versions/**'
 
 jobs:
   read_tailscale_version:
