@@ -25,7 +25,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           push-branch: 'main'
           commit-message: 'Add Tailscale release ${{ steps.tailscale-check.outputs.version }}'
-          # force-add: 'true'
+          force-add: 'true'
           files: tailscale-versions/tailscale-latest.txt
-          # name: Michal Muransky
-          # email: mike.muransky@gmail.com
+          name: Michal Muransky
+          email: mike.muransky@gmail.com
