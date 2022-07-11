@@ -2,7 +2,7 @@ name: Build image
 on:
   push:
     paths:
-      - 'tailscale-versions/tailscale-latest.txt'
+      - '**/tailscale-versions/tailscale-latest.txt'
 
 jobs:
   read_tailscale_version:
