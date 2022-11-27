@@ -18,6 +18,9 @@ if [[ -n "${ADVERTISE_EXIT_NODE}" ]]; then
 fi
 
 if [[ -n "${ADVERTISE_ROUTES}" ]]; then
+  echo 'net.ipv4.ip_forward = 1' | tee -a /etc/sysctl.d/99-tailscale.conf
+  echo 'net.ipv6.conf.all.forwarding = 1' | tee -a /etc/sysctl.d/99-tailscale.conf
+  sysctl -p /etc/sysctl.d/99-tailscale.conf
   echo $(date +"%Y/%m/%d %T") "Tailscale: ADVERTISE_ROUTES provided"
   tailscale_cmd="${tailscale_cmd} --advertise-routes=${ADVERTISE_ROUTES}"
 fi
