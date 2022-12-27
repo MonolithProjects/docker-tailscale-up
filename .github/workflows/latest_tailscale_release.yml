@@ -1,9 +1,8 @@
 name: Find Tailscale version
 on:
-  push:
-  # schedule:
-  #   - cron:  '0 3 * * 1'
-  # workflow_dispatch:
+  schedule:
+    - cron:  '0 3 * * 1'
+  workflow_dispatch:
 
 jobs:
   get-version:
