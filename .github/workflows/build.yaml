@@ -3,8 +3,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - tailscale-versions/tailscale-latest.txt
+    # paths:
+    #   - tailscale-versions/tailscale-latest.txt
 
 jobs:
   read_tailscale_version:
