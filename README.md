@@ -1,3 +1,8 @@
+# DEPRECATED
+
+This repository is depricated. The original tailscale container image now allows to run Tailscale easily and pass all the neccesary parameters.
+https://hub.docker.com/r/tailscale/tailscale
+
 # Tailscale-up Container image
 
 [![Build image](https://github.com/MonolithProjects/docker-tailscale-up/actions/workflows/build.yaml/badge.svg)](https://github.com/MonolithProjects/docker-tailscale-up/actions/workflows/build.yaml)

@@ -1,34 +1,34 @@
-name: Find Tailscale version
-on:
-  schedule:
-    - cron:  '0 3 * * *'
-  workflow_dispatch:
+# name: Find Tailscale version
+# on:
+#   schedule:
+#     - cron:  '0 3 * * *'
+#   workflow_dispatch:
 
-jobs:
-  get-version:
-    runs-on: ubuntu-latest
-    steps:
+# jobs:
+#   get-version:
+#     runs-on: ubuntu-latest
+#     steps:
 
-      - uses: actions/checkout@v3
+#       - uses: actions/checkout@v3
 
-      - name: Fetch laste Tailscale version
-        id: tailscale-check
-        run: |
-          curl -sL https://api.github.com/repos/tailscale/tailscale/releases/latest | \
-          jq -r ".tag_name" > tailscale-versions/tailscale-latest.txt
-          echo "tailscale-version=$(cat tailscale-versions/tailscale-latest.txt)" >> $GITHUB_OUTPUT
+#       - name: Fetch laste Tailscale version
+#         id: tailscale-check
+#         run: |
+#           curl -sL https://api.github.com/repos/tailscale/tailscale/releases/latest | \
+#           jq -r ".tag_name" > tailscale-versions/tailscale-latest.txt
+#           echo "tailscale-version=$(cat tailscale-versions/tailscale-latest.txt)" >> $GITHUB_OUTPUT
 
-      - name: Check for modified files
-        id: git-check
-        run: echo "modified=$([ -z "$(git status --porcelain)" ] && echo "false" || echo "true")" >> $GITHUB_OUTPUT
+#       - name: Check for modified files
+#         id: git-check
+#         run: echo "modified=$([ -z "$(git status --porcelain)" ] && echo "false" || echo "true")" >> $GITHUB_OUTPUT
 
-      - name: Commit latest release version
-        if: steps.git-check.outputs.modified == 'true'
-        uses: actions-x/commit@v6
-        with:
-          email: mike.muransky@gmail.com
-          name: GitHub Actions Autocommit
-          branch: main
-          message: "Add Tailscale release ${{ steps.tailscale-check.outputs.tailscale-version }}"
-          force: true
-          directory: tailscale-versions
+#       - name: Commit latest release version
+#         if: steps.git-check.outputs.modified == 'true'
+#         uses: actions-x/commit@v6
+#         with:
+#           email: mike.muransky@gmail.com
+#           name: GitHub Actions Autocommit
+#           branch: main
+#           message: "Add Tailscale release ${{ steps.tailscale-check.outputs.tailscale-version }}"
+#           force: true
+#           directory: tailscale-versions
